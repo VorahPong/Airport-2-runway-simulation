@@ -3,7 +3,7 @@
 Your name:					VorahPong, Mean
 Class:						CS 2413 Data Structures
 Assignment #:				Project# 2 Airport Runway Control Simulation
-Due date:					March. 25, 2024
+Due date:					March. 28, 2024
 Instructor:					Chao Zhao
 Program Description:		Create two runways for Airport Simulation
 
@@ -62,15 +62,23 @@ int main() {
 
 			//Airplane coming to landing is more important than airplane going to take off
 			// 
-			//if runway not busy and landing queue is not empty then an airplane can come to land
+			//if landing runway is not busy then the airplane in landing queue can come to land
 			if (!simTest.is_landing_runway_busy() && !landing_queue.empty()) {
 				next_process_airplane = landing_queue.front();
 				landing_queue.pop();
 				simTest.sum_landing_time(current_airplane - next_process_airplane);
 				simTest.start_landing();
 			}
-			//if runway not busy and landing queue is empty then an airplane can take off
-			if (!simTest.is_takeOff_runway_busy() && !takeOff_queue.empty()) {
+			//else if landing runway is busy, then try to use the take off runway to land since landing is more important than take off
+			else if(!simTest.is_takeOff_runway_busy() && !landing_queue.empty()) {
+				next_process_airplane = landing_queue.front();
+				landing_queue.pop();
+				simTest.sum_landing_time(current_airplane - next_process_airplane);
+				simTest.start_takeOff();
+			}
+
+			//if take off runway not busy and landing queue is empty then an airplane can take off
+			if (!simTest.is_takeOff_runway_busy() && landing_queue.empty() && !takeOff_queue.empty()) {
 				next_process_airplane = takeOff_queue.front();
 				takeOff_queue.pop();
 				simTest.sum_takeOff_time(current_airplane - next_process_airplane);

@@ -3,7 +3,7 @@ Project Description & How to Use the Project:
 
 	This project was coded with Visual Studio 2022, C++ 14 Standard.
 
-	When run, it will prompt for an simulation length, landing time, take off time, landing arrival rate, take off arrival rate. After everything are read, it will return the simulation 	result.
+	When run, it will prompt for an simulation length, landing time, take off time, landing arrival rate, take off arrival rate. After everything are read, it will return the simulation result.
 
 	Then it will prompt if the user wants to use it again. Put 'y' for yes, and 'n' for no.
 		For example:
